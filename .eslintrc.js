@@ -20,6 +20,8 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'warn'
+    '@typescript-eslint/no-use-before-define': 'warn',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off'
   }
 }
