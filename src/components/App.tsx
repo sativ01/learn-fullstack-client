@@ -1,26 +1,26 @@
-import { BrowserRouter, Route } from 'react-router-dom'
-
-const Survey = () => <h3> Survey </h3>
-const Langing = () => <h4> Langing </h4>
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import '@fontsource/roboto'
+import { BrowserRouter } from 'react-router-dom'
+import SignUp from '../features/auth/SignUp'
+import HeadBar from './HeadBar'
+import { RootState } from '../rootReducer'
+import { fetchUser } from '../features/auth/authSlice'
 
 function App () {
+  const { user, loading } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
         <BrowserRouter>
-          <div>
-            <Route path="/" exact component={Langing} />
-            <Route path="/survey" component={Survey} />
-          </div>
+          <HeadBar user={user} loading={loading} />
+          <div>{!user.id && !loading && <SignUp />}</div>
         </BrowserRouter>
-        <a
-          className="App-link"
-          href="/auth/google"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Login with Google
-        </a>
       </header>
     </div>
   )
